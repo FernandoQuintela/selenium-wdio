@@ -101,7 +101,7 @@ QA Automation Engineer – Selenium / WebdriverIO / Allure / CI/CD
 
 📧 fernand.quintela@gmail.com
 
-🌐 [GitHub Profile] (https://github.com/FernandoQuintela)
+🌐 [GitHub Profile](https://github.com/FernandoQuintela)
 
 ---
 
