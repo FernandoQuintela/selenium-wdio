@@ -1,4 +1,4 @@
-import LoginPage from '../pageobjects/LoginPage.js';
+import LoginPage from '../pageobjects/login.page.js';
 import cases from '../data/login-cases.json' assert { type: 'json' };
 import { expect } from 'expect';
 
