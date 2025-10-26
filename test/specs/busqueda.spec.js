@@ -1,15 +1,17 @@
+import { allure } from '@wdio/allure-reporter';
+import { expect } from 'expect';
+
 describe('DuckDuckGo', () => {
   it('busca "selenium webdriver" y valida título', async () => {
-    await browser.url('https://duckduckgo.com');   // URL completa
-    const search = await $('[name="q"]');
-    await search.setValue('selenium webdriver');
-    await browser.keys('Enter');
+    allure.addFeature('Search Engine');
+    allure.addStory('Validar búsqueda funcional');
+    allure.addSeverity('minor');
+    allure.addEpic('Regression Suite');
+    allure.addTag('smoke', 'ui', 'regression');
 
-    await browser.waitUntil(
-      async () => (await browser.getTitle()).toLowerCase().includes('selenium'),
-      { timeout: 8000, timeoutMsg: 'Nunca apareció un título con "selenium"' }
-    );
-
+    await browser.url('https://duckduckgo.com');
+    await $('#searchbox_input').setValue('selenium webdriver');
+    await $('#searchbox_homepage').keys('Enter');
     const title = await browser.getTitle();
     expect(title.toLowerCase()).toContain('selenium');
   });

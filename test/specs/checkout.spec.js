@@ -1,17 +1,19 @@
-import Sauce from '../pageobjects/SaucePage.js';
+import { allure } from '@wdio/allure-reporter';
 import { expect } from 'expect';
+import SaucePage from '../pageobjects/sauce.page.js';
 
 describe('Checkout E2E (SauceDemo)', () => {
   it('compra un producto', async () => {
-    await Sauce.open();
-    await Sauce.doLogin('standard_user','secret_sauce');
+    allure.addFeature('E2E Flow');
+    allure.addStory('Compra completa');
+    allure.addSeverity('critical');
+    allure.addEpic('Smoke Suite');
+    allure.addTag('smoke', 'e2e', 'critical');
 
-    // Mejor esperar a que aparezca el listado antes de tocar botones, por si headless va rápido
-    await $('div.inventory_list').waitForDisplayed({ timeout: 10000 });
-
-    await Sauce.checkoutFlow();
-
-    await Sauce.success.waitForDisplayed({ timeout: 10000 });
-    expect(await Sauce.success.isDisplayed()).toBe(true);
+    await browser.url('https://www.saucedemo.com/');
+    await SaucePage.login('standard_user', 'secret_sauce');
+    await SaucePage.addToCart();
+    await SaucePage.checkout();
+    expect(await SaucePage.success.waitForDisplayed()).toBe(true);
   });
 });
