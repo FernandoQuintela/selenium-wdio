@@ -1,41 +1,24 @@
-const { $ } = require('@wdio/globals')
-const Page = require('./page');
+class LoginPage {
+  get inputUser() { return $('#username'); }
+  get inputPass() { return $('#password'); }
+  get btnLogin()  { return $('button[type="submit"]'); }
+  get flash()     { return $('#flash'); }
 
-/**
- * sub page containing specific selectors and methods for a specific page
- */
-class LoginPage extends Page {
-    /**
-     * define selectors using getter methods
-     */
-    get inputUsername () {
-        return $('#username');
-    }
+  async open() {
+    await browser.url('https://the-internet.herokuapp.com/login');
+  }
 
-    get inputPassword () {
-        return $('#password');
-    }
+  async login(user, pass) {
+    await this.inputUser.waitForDisplayed();
+    await this.inputUser.setValue(user);
+    await this.inputPass.setValue(pass);
+    await this.btnLogin.click();
+  }
 
-    get btnSubmit () {
-        return $('button[type="submit"]');
-    }
-
-    /**
-     * a method to encapsule automation code to interact with the page
-     * e.g. to login using username and password
-     */
-    async login (username, password) {
-        await this.inputUsername.setValue(username);
-        await this.inputPassword.setValue(password);
-        await this.btnSubmit.click();
-    }
-
-    /**
-     * overwrite specific options to adapt it to page object
-     */
-    open () {
-        return super.open('login');
-    }
+  async flashText() {
+    await this.flash.waitForDisplayed();
+    return (await this.flash.getText()).trim();
+  }
 }
 
-module.exports = new LoginPage();
+export default new LoginPage();

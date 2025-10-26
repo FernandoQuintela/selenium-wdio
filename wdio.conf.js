@@ -50,13 +50,19 @@ exports.config = {
     // https://saucelabs.com/platform/platform-configurator
     //
     capabilities: [{
-    browserName: 'chrome',
-    'goog:chromeOptions': {
-        args: process.env.CI
-        ? ['--headless=new', '--no-sandbox', '--disable-dev-shm-usage']
-        : []
-    }
+        browserName: 'chrome',
+        'goog:chromeOptions': {
+            args: process.env.CI
+            ? [
+                '--headless=new',
+                '--no-sandbox',
+                '--disable-dev-shm-usage',
+                '--window-size=1366,768'
+                ]
+            : []
+        }
     }],
+
 
 
     //
