@@ -30,7 +30,15 @@ describe('Wikipedia search', () => {
     const submit = await $('button[type="submit"]');
     await browser.execute("arguments[0].scrollIntoView()", submit);
     await browser.pause(500); // pequeño delay por si el banner tapa
-    await submit.click();
+
+    try {
+      await submit.click();
+    } catch {
+      await browser.execute(() => window.scrollBy(0, 400));
+      await browser.pause(500);
+      await browser.execute("arguments[0].scrollIntoView(true)", submit);
+      await submit.click();
+    }
 
     // Esperar a que cargue resultados o artículo
     const heading = await $('#firstHeading');
