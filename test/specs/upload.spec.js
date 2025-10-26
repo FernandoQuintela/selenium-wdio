@@ -1,4 +1,4 @@
-import { allure } from '@wdio/allure-reporter';
+import allure from '@wdio/allure-reporter';
 import path from 'node:path';
 import { expect } from 'expect';
 

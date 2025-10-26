@@ -1,4 +1,4 @@
-import { allure } from '@wdio/allure-reporter';
+import allure from '@wdio/allure-reporter';
 import { expect } from 'expect';
 import LoginPage from '../pageobjects/login.page.js';
 
